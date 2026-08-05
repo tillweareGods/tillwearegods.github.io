@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Title — Subtext</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        surface:  { dark: '#0a0a0a', light: '#282828' },
+                        card:     { dark: '#141414', light: '#333333' },
+                        subtle:   { dark: 'rgba(255,255,255,0.06)', light: 'rgba(255,255,255,0.1)' },
+                        muted:    { dark: 'rgba(255,255,255,0.4)',  light: 'rgba(255,255,255,0.55)' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        html.transitioning,
+        html.transitioning *,
+        html.transitioning *::before,
+        html.transitioning *::after {
+            transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease !important;
+        }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        .dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+        html:not(.dark) ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+        /* Prose styling */
+        .prose p { margin-bottom: 1.5em; }
+        .prose h2 { font-size: 1.375rem; font-weight: 500; margin-top: 2.5em; margin-bottom: 0.75em; letter-spacing: -0.01em; }
+        .prose h3 { font-size: 1.125rem; font-weight: 500; margin-top: 2em; margin-bottom: 0.5em; }
+        .prose a { text-decoration: underline; text-underline-offset: 2px; }
+        .prose a:hover { opacity: 0.7; }
+        .prose blockquote { border-left: 2px solid rgba(255,255,255,0.15); padding-left: 1.25em; margin: 1.5em 0; font-style: italic; }
+        .prose code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.875em; background: rgba(255,255,255,0.06); padding: 0.15em 0.4em; border-radius: 4px; }
+        .prose pre { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.25em; overflow-x: auto; margin: 1.5em 0; }
+        .prose pre code { background: none; padding: 0; }
+        .prose ul, .prose ol { padding-left: 1.5em; margin-bottom: 1.5em; }
+        .prose li { margin-bottom: 0.4em; }
+        .prose img { border-radius: 12px; margin: 2em 0; width: 100%; }
+        .prose hr { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 2.5em 0; }
+    </style>
+</head>
+
+<body class="bg-surface-dark text-white min-h-screen">
+
+    <!-- Nav -->
+    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
+        <div id="navbar" class="bg-card-dark rounded-full px-6 py-3 flex items-center justify-between border border-subtle-dark">
+            <a href="/" class="flex items-center gap-2.5">
+                <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
+                    <span class="text-black text-xs font-semibold">S</span>
+                </div>
+                <span class="font-medium text-sm tracking-tight hidden sm:inline">Subtext</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/" class="text-sm text-white/60 hover:text-white transition-colors hidden sm:inline">Posts</a>
+                <button id="theme-toggle" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" aria-label="Toggle theme">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="max-w-2xl mx-auto px-6 pt-32 pb-24">
+        <a href="/" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-12">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to posts
+        </a>
+
+        <header class="mb-12">
+            <p class="text-[10px] font-mono uppercase tracking-widest text-white/25 mb-4">December 14, 2024</p>
+            <h1 class="text-3xl sm:text-4xl font-medium tracking-tight leading-[1.15]">The quiet architecture of attention in a noisy world</h1>
+        </header>
+
+        <article class="prose text-white/60 font-light leading-[1.75] text-[15px]">
+
+            <p>We've built entire economies around distraction. Every notification, every infinite scroll, every algorithmically-placed recommendation is a tiny architectural decision that shapes what we pay attention to. And by extension, what we think about. Who we become.</p>
+
+            <p>I don't think this is a moral failing of technology. It's more interesting than that. It's a design problem — one where the incentives of the builder and the needs of the user are fundamentally misaligned.</p>
+
+            <h2>The shape of a day</h2>
+
+            <p>Most of us don't design our days. We react to them. The phone buzzes, we look. The tab refreshes, we scroll. An email arrives, we respond. Each of these is a micro-decision that feels inconsequential in the moment but compounds into a life lived in reaction rather than intention.</p>
+
+            <blockquote>The cost of a thing is the amount of what I call life which is required to be exchanged for it. — Thoreau</blockquote>
+
+            <p>What would it look like to design for depth instead? Not in a rigid, productivity-guru way — but in a way that leaves room for thinking, for boredom, for the slow accretion of understanding that can't be shortcut.</p>
+
+            <h2>Smaller architecture</h2>
+
+            <p>I've found that the changes that stick aren't dramatic. They're structural. Moving the phone charger to another room. Deleting the app that wastes the most time. Keeping a book on the desk where the phone used to be.</p>
+
+            <p>These aren't hacks. They're architectural choices. They change the path of least resistance so that the easy thing is also the good thing.</p>
+
+            <hr>
+
+            <p>Attention isn't a resource to be managed. It's an architecture to be designed. And the good news is, you're the architect — even if it doesn't always feel that way.</p>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-subtle-dark">
+        <div class="max-w-2xl mx-auto px-6 py-10 flex items-center justify-between">
+            <a href="/" class="text-xs text-white/25 hover:text-white/50 transition-colors">← All posts</a>
+            <a href="https://github.com" class="text-white/25 hover:text-white/60 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
+        </div>
+    </footer>
+
+    <script>
+    lucide.createIcons();
+    const html = document.documentElement;
+    const body = document.body;
+    const nav = document.getElementById('navbar');
+
+    function applyTheme(dark) {
+        if (dark) {
+            html.classList.add('dark');
+            body.className = body.className.replace('bg-surface-light','bg-surface-dark');
+            nav.className = nav.className.replace('bg-card-light','bg-card-dark').replace('border-subtle-light','border-subtle-dark');
+        } else {
+            html.classList.remove('dark');
+            body.className = body.className.replace('bg-surface-dark','bg-surface-light');
+            nav.className = nav.className.replace('bg-card-dark','bg-card-light').replace('border-subtle-dark','border-subtle-light');
+        }
+        lucide.createIcons();
+    }
+
+    if (localStorage.getItem('theme') === 'light') applyTheme(false);
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        html.classList.add('transitioning');
+        applyTheme(!html.classList.contains('dark'));
+        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        setTimeout(() => html.classList.remove('transitioning'), 450);
+    });
+    </script>
+</body>
+</html>

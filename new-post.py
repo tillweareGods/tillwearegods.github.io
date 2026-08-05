@@ -26,7 +26,6 @@ Input md structure:
 
 
 """
-
 import re
 import sys
 import os
@@ -34,7 +33,7 @@ from datetime import date
 
 POSTS_DIR = "posts"
 INDEX_FILE = "index.html"
-BLOG_NAME = "Till we are Gods Blog"
+BLOG_NAME = "Till we are Gods blog"
 
 # ─── Post HTML template ───────────────────────────────────────────────
 
@@ -91,14 +90,14 @@ TEMPLATE = '''<!DOCTYPE html>
 </head>
 <body class="bg-surface-dark text-white min-h-screen">
     <header class="max-w-2xl mx-auto px-6 pt-16 pb-12 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5">
+        <a href="../" class="flex items-center gap-2.5">
             <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
                 <span class="text-black text-xs font-semibold">S</span>
             </div>
             <span class="font-medium text-sm tracking-tight">__BLOG_NAME__</span>
         </a>
         <div class="flex items-center gap-4">
-            <a href="/" class="text-sm text-white/40 hover:text-white/70 transition-colors hidden sm:inline">Posts</a>
+            <a href="../" class="text-sm text-white/40 hover:text-white/70 transition-colors hidden sm:inline">Posts</a>
             <button id="theme-toggle" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" aria-label="Toggle theme">
                 <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
                 <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
@@ -106,7 +105,7 @@ TEMPLATE = '''<!DOCTYPE html>
         </div>
     </header>
     <main class="max-w-2xl mx-auto px-6 pb-24">
-        <a href="/" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-12">
+        <a href="../" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-12">
             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to posts
         </a>
         <header class="mb-12">
@@ -119,7 +118,7 @@ __BODY__
     </main>
     <footer class="border-t border-subtle-dark">
         <div class="max-w-2xl mx-auto px-6 py-10 flex items-center justify-between">
-            <a href="/" class="text-xs text-white/25 hover:text-white/50 transition-colors">&larr; All posts</a>
+            <a href="../" class="text-xs text-white/25 hover:text-white/50 transition-colors">&larr; All posts</a>
             <a href="https://github.com" class="text-white/25 hover:text-white/60 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
         </div>
     </footer>
@@ -174,8 +173,6 @@ UL_PREFIX = re.compile(r"^[-*+]\s+")
 OL_PREFIX = re.compile(r"^\d+\.\s+")
 BQ_PREFIX  = re.compile(r"^>\s?")
 
-# Placeholder format using section signs — impossible to conflict with
-# markdown syntax like __bold__ which was destroying the old __IC_X__ format
 IC_OPEN  = '\xa7IC_'
 IC_CLOSE = '\xa7'
 
@@ -185,7 +182,6 @@ IC_CLOSE = '\xa7'
 def parse_md(md):
     md = md.replace('\r\n', '\n').replace('\r', '\n')
 
-    # 1. Pull out fenced code blocks
     blocks = []
     def grab_block(m):
         content = m.group(1)
@@ -197,37 +193,31 @@ def parse_md(md):
         return '\n__CB_%d__\n' % (len(blocks) - 1)
     md = re.sub(r'```[^\n]*\n(.*?)```', grab_block, md, flags=re.DOTALL)
 
-    # 2. Pull out inline code — use §IC_X§ as placeholder
     inlines = []
     def grab_inline(m):
         inlines.append(m.group(1))
         return '%s%d%s' % (IC_OPEN, len(inlines) - 1, IC_CLOSE)
     md = re.sub(r'`([^`\n]+)`', grab_inline, md)
 
-    # 3. Strip any remaining lone backticks
     md = md.replace('`', '')
 
-    # 4. Process lines into blocks
     lines = md.split('\n')
     out = []
     i = 0
     while i < len(lines):
         s = lines[i].strip()
 
-        # Code block placeholder
         cm = re.match(r'^__CB_(\d+)__$', s)
         if cm:
             out.append('<pre><code>%s</code></pre>' % esc(blocks[int(cm.group(1))]))
             i += 1
             continue
 
-        # Horizontal rule
         if re.match(r'^(\*{3,}|-{3,}|_{3,})$', s):
             out.append('<hr>')
             i += 1
             continue
 
-        # Heading
         hm = re.match(r'^(#{1,6})\s+(.+)$', s)
         if hm:
             lvl = len(hm.group(1))
@@ -235,7 +225,6 @@ def parse_md(md):
             i += 1
             continue
 
-        # Blockquote
         if s.startswith('>'):
             rows = []
             while i < len(lines) and lines[i].strip().startswith('>'):
@@ -248,7 +237,6 @@ def parse_md(md):
             out.append('<blockquote>%s</blockquote>' % ''.join(rows))
             continue
 
-        # Unordered list
         if UL_PREFIX.match(s):
             items = []
             while i < len(lines) and UL_PREFIX.match(lines[i].strip()):
@@ -258,7 +246,6 @@ def parse_md(md):
             out.append('<ul>%s</ul>' % ''.join(items))
             continue
 
-        # Ordered list
         if OL_PREFIX.match(s):
             items = []
             while i < len(lines) and OL_PREFIX.match(lines[i].strip()):
@@ -268,12 +255,10 @@ def parse_md(md):
             out.append('<ol>%s</ol>' % ''.join(items))
             continue
 
-        # Empty
         if s == '':
             i += 1
             continue
 
-        # Paragraph
         para = []
         while i < len(lines):
             s2 = lines[i].strip()
@@ -293,19 +278,12 @@ def parse_md(md):
 
 
 def inline(text, inlines):
-    # Images before links
     text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', r'<img src="\2" alt="\1">', text)
-    # Links
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', text)
-    # Bold **text**
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-    # Bold __text__ (word-bounded to avoid matching __init__ etc.)
     text = re.sub(r'(?<!\w)__(.+?)__(?!\w)', r'<strong>\1</strong>', text)
-    # Italic *text*
     text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
-    # Italic _text_ (word-bounded)
     text = re.sub(r'(?<!\w)_(.+?)_(?!\w)', r'<em>\1</em>', text)
-    # Restore inline code — safe now since §IC_X§ can't conflict with __
     def restore(m):
         return '<code>%s</code>' % esc(inlines[int(m.group(1))])
     pattern = '%s(\\d+)%s' % (re.escape(IC_OPEN), re.escape(IC_CLOSE))

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Till we are Gods Blog</title>
+    <title>Till we are Gods blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -41,13 +41,12 @@
 
 <body class="bg-surface-dark text-white min-h-screen">
 
-    <!-- Header -->
     <header class="max-w-2xl mx-auto px-6 pt-16 pb-12 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5">
+        <a href="./" class="flex items-center gap-2.5">
             <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
                 <span class="text-black text-xs font-semibold">S</span>
             </div>
-            <span class="font-medium text-sm tracking-tight">Till we are Gods Blog</span>
+            <span class="font-medium text-sm tracking-tight">Till we are Gods blog</span>
         </a>
         <button id="theme-toggle" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" aria-label="Toggle theme">
             <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
@@ -55,29 +54,19 @@
         </button>
     </header>
 
-    <!-- Posts -->
     <main class="max-w-2xl mx-auto px-6 pb-24">
         <p class="text-[10px] font-mono uppercase tracking-widest text-white/30 mb-10">Blog</p>
         <div id="posts-list" class="space-y-0"></div>
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-subtle-dark">
         <div class="max-w-2xl mx-auto px-6 py-10 flex items-center justify-between">
-            <span class="text-xs text-white/25">© 2024</span>
+            <span class="text-xs text-white/25">&copy; 2025</span>
             <a href="https://github.com" class="text-white/25 hover:text-white/60 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
         </div>
     </footer>
 
     <script>
-    /*
-     * ═══════════════════════════════════════════
-     *  TO ADD A NEW POST:
-     *  1. Copy posts/_template.html to posts/your-slug.html
-     *  2. Edit that file with your content
-     *  3. Add an entry to the array below
-     * ═══════════════════════════════════════════
-     */
     const posts = [
         {
             title: "How to accidentally delete your file system in Linux",
@@ -87,25 +76,23 @@
     ];
 
     const list = document.getElementById('posts-list');
-    posts.forEach(post => {
+    posts.forEach(function(post) {
         const d = new Date(post.date + 'T00:00:00');
         const formatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         const a = document.createElement('a');
-        a.href = '/posts/' + post.slug + '.html';
+        a.href = 'posts/' + post.slug + '.html';
         a.className = 'group block py-6 border-b border-subtle-dark hover:border-white/15 transition-colors';
-        a.innerHTML = `
-            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">
-                <span class="text-xs text-white/25 font-mono shrink-0 w-28">${formatted}</span>
-                <h2 class="text-base sm:text-lg font-medium tracking-tight text-white/70 group-hover:text-white transition-colors">${post.title}</h2>
-            </div>
-        `;
+        a.innerHTML =
+            '<div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">' +
+                '<span class="text-xs text-white/25 font-mono shrink-0 w-28">' + formatted + '</span>' +
+                '<h2 class="text-base sm:text-lg font-medium tracking-tight text-white/70 group-hover:text-white transition-colors">' + post.title + '</h2>' +
+            '</div>';
         list.appendChild(a);
     });
 
-    // Theme
     lucide.createIcons();
-    const html = document.documentElement;
-    const body = document.body;
+    var html = document.documentElement;
+    var body = document.body;
 
     function applyTheme(dark) {
         if (dark) {
@@ -115,7 +102,7 @@
             html.classList.remove('dark');
             body.className = body.className.replace('bg-surface-dark','bg-surface-light');
         }
-        list.querySelectorAll('a').forEach(a => {
+        list.querySelectorAll('a').forEach(function(a) {
             a.classList.toggle('border-subtle-dark', dark);
             a.classList.toggle('border-subtle-light', !dark);
         });
@@ -126,11 +113,11 @@
 
     if (localStorage.getItem('theme') === 'light') applyTheme(false);
 
-    document.getElementById('theme-toggle').addEventListener('click', () => {
+    document.getElementById('theme-toggle').addEventListener('click', function() {
         html.classList.add('transitioning');
         applyTheme(!html.classList.contains('dark'));
         localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        setTimeout(() => html.classList.remove('transitioning'), 450);
+        setTimeout(function() { html.classList.remove('transitioning'); }, 450);
     });
     </script>
 </body>

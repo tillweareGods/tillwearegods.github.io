@@ -53,17 +53,29 @@ TEMPLATE = '''<!DOCTYPE html>
             extend: {
                 fontFamily: { sans: ['Inter', 'sans-serif'] },
                 colors: {
-                    surface:  { dark: '#0a0a0a', light: '#282828' },
-                    card:     { dark: '#141414', light: '#333333' },
-                    subtle:   { dark: 'rgba(255,255,255,0.06)', light: 'rgba(255,255,255,0.1)' },
-                    muted:    { dark: 'rgba(255,255,255,0.4)',  light: 'rgba(255,255,255,0.55)' },
-                }
+                    surface:  { dark: '#110d0b', light: '#faf5ee' },
+                    card:     { dark: '#1d1714', light: '#ffffff' },
+                    subtle:   { dark: 'rgba(255,145,110,0.08)', light: 'rgba(33,26,21,0.1)' },
+                    muted:    { dark: 'rgba(242,236,229,0.4)',  light: 'rgba(33,26,21,0.5)' },
+                },
             }
         }
     }
     </script>
     <style>
     html { scroll-behavior: smooth; }
+    :root { --accent: #ff5c33; }
+    .glow { position: fixed; border-radius: 50%; background: var(--accent); pointer-events: none; z-index: -1; }
+    .glow-1 { top: -80px; right: -80px; width: 280px; height: 280px; opacity: 0.18; }
+    .glow-2 { bottom: -100px; left: -100px; width: 320px; height: 320px; opacity: 0.18; }
+    .glow-3 { top: 40%; left: -60px; width: 180px; height: 180px; opacity: 0.15; }
+    .glow-4 { top: 15%; right: 10%; width: 90px; height: 90px; opacity: 0.16; }
+    .glow-5 { bottom: 20%; right: -40px; width: 140px; height: 140px; opacity: 0.15; }
+    html.dark .glow-1 { opacity: 0.12; }
+    html.dark .glow-2 { opacity: 0.08; }
+    html.dark .glow-3 { opacity: 0.07; }
+    html.dark .glow-4 { opacity: 0.09; }
+    html.dark .glow-5 { opacity: 0.08; }
     body { font-family: 'Inter', sans-serif; }
     html.transitioning, html.transitioning *, html.transitioning *::before, html.transitioning *::after {
         transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease !important;
@@ -75,10 +87,10 @@ TEMPLATE = '''<!DOCTYPE html>
     .prose p { margin-bottom: 1.5em; }
     .prose h2 { font-size: 1.375rem; font-weight: 500; margin-top: 2.5em; margin-bottom: 0.75em; letter-spacing: -0.01em; color: rgba(255,255,255,0.85); }
     .prose h3 { font-size: 1.125rem; font-weight: 500; margin-top: 2em; margin-bottom: 0.5em; color: rgba(255,255,255,0.8); }
-    .prose a { text-decoration: underline; text-underline-offset: 2px; }
-    .prose a:hover { opacity: 0.7; }
-    .prose blockquote { border-left: 2px solid rgba(255,255,255,0.12); padding-left: 1.25em; margin: 1.5em 0; font-style: italic; }
-    .prose code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.875em; background: rgba(255,255,255,0.06); padding: 0.15em 0.4em; border-radius: 4px; }
+    .prose a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(255,92,51,0.4); text-underline-offset: 2px; }
+    .prose a:hover { text-decoration-color: var(--accent); opacity: 1; }
+    .prose blockquote { border-left: 2px solid var(--accent); padding-left: 1.25em; margin: 1.5em 0; font-style: italic; }
+    .prose code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.875em; color: var(--accent); background: rgba(255,92,51,0.1); padding: 0.15em 0.4em; border-radius: 4px; }
     .prose pre { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.25em; overflow-x: auto; margin: 1.5em 0; }
     .prose pre code { background: none; padding: 0; font-size: 0.8125rem; }
     .prose ul, .prose ol { padding-left: 1.5em; margin-bottom: 1.5em; }
@@ -86,13 +98,48 @@ TEMPLATE = '''<!DOCTYPE html>
     .prose img { border-radius: 12px; margin: 2em 0; width: 100%; }
     .prose hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 2.5em 0; }
     .prose strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+    html:not(.dark) body,
+    html:not(.dark) .prose { color: #211a15; }
+    html:not(.dark) .text-white\\/85 { color: rgba(33,26,21,0.85) !important; }
+    html:not(.dark) .text-white\\/80 { color: rgba(33,26,21,0.8) !important; }
+    html:not(.dark) .text-white\\/70 { color: rgba(33,26,21,0.7) !important; }
+    html:not(.dark) .text-white\\/60 { color: rgba(33,26,21,0.6) !important; }
+    html:not(.dark) .text-white\\/40 { color: rgba(33,26,21,0.45) !important; }
+    html:not(.dark) .text-white\\/30 { color: rgba(33,26,21,0.35) !important; }
+    html:not(.dark) .text-white\\/25 { color: rgba(33,26,21,0.3) !important; }
+    html:not(.dark) .border-white\\/10 { border-color: rgba(33,26,21,0.15) !important; }
+    html:not(.dark) .hover\\:text-white\\/70:hover { color: rgba(33,26,21,0.85) !important; }
+    html:not(.dark) .group:hover .group-hover\\:text-white { color: #211a15 !important; }
+    html:not(.dark) .brand-link { position: relative; display: inline-flex; }
+    html:not(.dark) .brand-link::after {
+        content: ''; position: absolute; left: 0; bottom: -10px;
+        width: 32px; height: 2px; background: #ff5c33;
+    }
+    html:not(.dark) .font-mono { color: #ff5c33 !important; }
+    html:not(.dark) .prose pre { background: #ffffff; border-color: rgba(33,26,21,0.08); }
+    html:not(.dark) .prose h2 { color: rgba(33,26,21,0.85); }
+    html:not(.dark) .prose h3 { color: rgba(33,26,21,0.8); }
+    html:not(.dark) .prose strong { color: rgba(33,26,21,0.85); }
+    html:not(.dark) body {
+        background-image: radial-gradient(rgba(33,26,21,0.06) 1px, transparent 1px);
+        background-size: 22px 22px;
+    }
+    html:not(.dark) .prose h2::before {
+        content: ''; display: inline-block; width: 8px; height: 8px;
+        background: var(--accent); margin-right: 8px; border-radius: 2px;
+    }
     </style>
 </head>
 <body class="bg-surface-dark text-white min-h-screen">
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="glow glow-3" aria-hidden="true"></div>
+    <div class="glow glow-4" aria-hidden="true"></div>
+    <div class="glow glow-5" aria-hidden="true"></div>
     <header class="max-w-2xl mx-auto px-6 pt-16 pb-12 flex items-center justify-between">
-        <a href="../" class="flex items-center gap-2.5">
-            <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
-                <span class="text-black text-xs font-semibold">S</span>
+        <a href="../" class="brand-link flex items-center gap-2.5">
+            <div class="w-7 h-7 bg-[#ff5c33] rounded-full flex items-center justify-center">
+                <span class="text-white text-xs font-semibold">S</span>
             </div>
             <span class="font-medium text-sm tracking-tight">__BLOG_NAME__</span>
         </a>
@@ -105,11 +152,11 @@ TEMPLATE = '''<!DOCTYPE html>
         </div>
     </header>
     <main class="max-w-2xl mx-auto px-6 pb-24">
-        <a href="../" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-12">
+        <a href="../" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-[#ff5c33] transition-colors mb-12">
             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to posts
         </a>
         <header class="mb-12">
-            <p class="text-[10px] font-mono uppercase tracking-widest text-white/25 mb-4">__DATE__</p>
+            <p class="text-[10px] font-mono uppercase tracking-widest text-[#ff5c33] mb-4">__DATE__</p>
             <h1 class="text-3xl sm:text-4xl font-medium tracking-tight leading-[1.15]">__TITLE__</h1>
         </header>
         <article class="prose text-white/60 font-light leading-[1.75] text-[15px]">

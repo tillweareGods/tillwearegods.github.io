@@ -1,124 +1,338 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Till we are Gods blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        surface:  { dark: '#0a0a0a', light: '#282828' },
-                        card:     { dark: '#141414', light: '#333333' },
-                        subtle:   { dark: 'rgba(255,255,255,0.06)', light: 'rgba(255,255,255,0.1)' },
-                        muted:    { dark: 'rgba(255,255,255,0.4)',  light: 'rgba(255,255,255,0.55)' },
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+            colors: {
+              surface: { dark: "#110d0b", light: "#faf5ee" },
+              card: { dark: "#1d1714", light: "#ffffff" },
+              subtle: {
+                dark: "rgba(255,145,110,0.08)",
+                light: "rgba(33,26,21,0.1)",
+              },
+              muted: {
+                dark: "rgba(242,236,229,0.4)",
+                light: "rgba(33,26,21,0.5)",
+              },
+            },
+          },
+        },
+      };
     </script>
     <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; }
-        html.transitioning,
-        html.transitioning *,
-        html.transitioning *::before,
-        html.transitioning *::after {
-            transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease !important;
-        }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        .dark ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
-        html:not(.dark) ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+      html {
+        scroll-behavior: smooth;
+      }
+      :root {
+        --accent: #ff5c33;
+      }
+      .glow {
+        position: fixed;
+        border-radius: 50%;
+        background: var(--accent);
+        pointer-events: none;
+        z-index: -1;
+      }
+      .glow-1 {
+        top: -80px;
+        right: -80px;
+        width: 280px;
+        height: 280px;
+        opacity: 0.18;
+      }
+      .glow-2 {
+        bottom: -100px;
+        left: -100px;
+        width: 320px;
+        height: 320px;
+        opacity: 0.18;
+      }
+      .glow-3 {
+        top: 40%;
+        left: -60px;
+        width: 180px;
+        height: 180px;
+        opacity: 0.15;
+      }
+      .glow-4 {
+        top: 15%;
+        right: 10%;
+        width: 90px;
+        height: 90px;
+        opacity: 0.16;
+      }
+      .glow-5 {
+        bottom: 20%;
+        right: -40px;
+        width: 140px;
+        height: 140px;
+        opacity: 0.15;
+      }
+      html.dark .glow-1 {
+        opacity: 0.12;
+      }
+      html.dark .glow-2 {
+        opacity: 0.08;
+      }
+      html.dark .glow-3 {
+        opacity: 0.07;
+      }
+      html.dark .glow-4 {
+        opacity: 0.09;
+      }
+      html.dark .glow-5 {
+        opacity: 0.08;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      html.transitioning,
+      html.transitioning *,
+      html.transitioning *::before,
+      html.transitioning *::after {
+        transition:
+          background-color 400ms ease,
+          color 400ms ease,
+          border-color 400ms ease !important;
+      }
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 3px;
+      }
+      html:not(.dark) ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 3px;
+      }
+      html:not(.dark) body,
+      html:not(.dark) .prose {
+        color: #211a15;
+      }
+      html:not(.dark) .text-white\/85 {
+        color: rgba(33, 26, 21, 0.85) !important;
+      }
+      html:not(.dark) .text-white\/80 {
+        color: rgba(33, 26, 21, 0.8) !important;
+      }
+      html:not(.dark) .text-white\/70 {
+        color: rgba(33, 26, 21, 0.7) !important;
+      }
+      html:not(.dark) .text-white\/60 {
+        color: rgba(33, 26, 21, 0.6) !important;
+      }
+      html:not(.dark) .text-white\/40 {
+        color: rgba(33, 26, 21, 0.45) !important;
+      }
+      html:not(.dark) .text-white\/30 {
+        color: rgba(33, 26, 21, 0.35) !important;
+      }
+      html:not(.dark) .text-white\/25 {
+        color: rgba(33, 26, 21, 0.3) !important;
+      }
+      html:not(.dark) .border-white\/10 {
+        border-color: rgba(33, 26, 21, 0.15) !important;
+      }
+      html:not(.dark) .hover\:text-white\/70:hover {
+        color: rgba(33, 26, 21, 0.85) !important;
+      }
+      html:not(.dark) .group:hover .group-hover\:text-white {
+        color: #211a15 !important;
+      }
+      html:not(.dark) .brand-link {
+        position: relative;
+        display: inline-flex;
+      }
+      html:not(.dark) .brand-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 32px;
+        height: 2px;
+        background: #ff5c33;
+      }
+      html:not(.dark) .font-mono {
+        color: #ff5c33 !important;
+      }
+      html:not(.dark) .prose pre {
+        background: #ffffff;
+        border-color: rgba(33, 26, 21, 0.08);
+      }
+      html:not(.dark) .prose h2 {
+        color: rgba(33, 26, 21, 0.85);
+      }
+      html:not(.dark) .prose h3 {
+        color: rgba(33, 26, 21, 0.8);
+      }
+      html:not(.dark) .prose strong {
+        color: rgba(33, 26, 21, 0.85);
+      }
+      html:not(.dark) body {
+        background-image: radial-gradient(
+          rgba(33, 26, 21, 0.06) 1px,
+          transparent 1px
+        );
+        background-size: 22px 22px;
+      }
+      html:not(.dark) .prose h2::before {
+        content: "";
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        margin-right: 8px;
+        border-radius: 2px;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-surface-dark text-white min-h-screen">
+  <body class="bg-surface-dark text-white min-h-screen">
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="glow glow-3" aria-hidden="true"></div>
+    <div class="glow glow-4" aria-hidden="true"></div>
+    <div class="glow glow-5" aria-hidden="true"></div>
 
-    <header class="max-w-2xl mx-auto px-6 pt-16 pb-12 flex items-center justify-between">
-        <a href="./" class="flex items-center gap-2.5">
-            <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
-                <span class="text-black text-xs font-semibold">S</span>
-            </div>
-            <span class="font-medium text-sm tracking-tight">Till we are Gods blog</span>
-        </a>
-        <button id="theme-toggle" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" aria-label="Toggle theme">
-            <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
-            <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
-        </button>
+    <header
+      class="max-w-2xl mx-auto px-6 pt-16 pb-12 flex items-center justify-between"
+    >
+      <a href="./" class="brand-link flex items-center gap-2.5">
+        <div class="w-7 h-7 bg-[#ff5c33] rounded-full flex items-center justify-center">
+    <span class="text-white text-xs font-semibold">S</span>
+        </div>
+        <span class="font-medium text-sm tracking-tight"
+          >Till we are Gods blog</span
+        >
+      </a>
+      <button
+        id="theme-toggle"
+        class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+        aria-label="Toggle theme"
+      >
+        <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+        <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+      </button>
     </header>
 
     <main class="max-w-2xl mx-auto px-6 pb-24">
-        <p class="text-[10px] font-mono uppercase tracking-widest text-white/30 mb-10">Blog</p>
-        <div id="posts-list" class="space-y-0"></div>
+      <p
+        class="text-[10px] font-mono uppercase tracking-widest text-white/30 mb-10"
+      >
+        Blog
+      </p>
+      <div id="posts-list" class="space-y-0"></div>
     </main>
 
     <footer class="border-t border-subtle-dark">
-        <div class="max-w-2xl mx-auto px-6 py-10 flex items-center justify-between">
-            <span class="text-xs text-white/25">&copy; 2026</span>
-            <a href="https://github.com" class="text-white/25 hover:text-white/60 transition-colors"><i data-lucide="github" class="w-4 h-4"></i></a>
-        </div>
+      <div
+        class="max-w-2xl mx-auto px-6 py-10 flex items-center justify-between"
+      >
+        <span class="text-xs text-white/25">&copy; 2026</span>
+        <a
+          href="https://github.com"
+          class="text-white/25 hover:text-white/60 transition-colors"
+          ><i data-lucide="github" class="w-4 h-4"></i
+        ></a>
+      </div>
     </footer>
 
     <script>
-    const posts = [
+      const posts = [
         {
-            title: "How to accidentally delete your Operating system in Linux",
-            date: "2026-08-01",
-            slug: "how-to-accidentally-delete-your-operating-system"
-        }
-    ];
+          title: "How to accidentally delete your Operating system in Linux",
+          date: "2026-08-01",
+          slug: "how-to-accidentally-delete-your-operating-system",
+        },
+      ];
 
-    const list = document.getElementById('posts-list');
-    posts.forEach(function(post) {
-        const d = new Date(post.date + 'T00:00:00');
-        const formatted = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        const a = document.createElement('a');
-        a.href = 'posts/' + post.slug + '.html';
-        a.className = 'group block py-6 border-b border-subtle-dark hover:border-white/15 transition-colors';
-        a.innerHTML =
-            '<div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">' +
-                '<span class="text-xs text-white/25 font-mono shrink-0 w-28">' + formatted + '</span>' +
-                '<h2 class="text-base sm:text-lg font-medium tracking-tight text-white/70 group-hover:text-white transition-colors">' + post.title + '</h2>' +
-            '</div>';
-        list.appendChild(a);
-    });
-
-    lucide.createIcons();
-    var html = document.documentElement;
-    var body = document.body;
-
-    function applyTheme(dark) {
-        if (dark) {
-            html.classList.add('dark');
-            body.className = body.className.replace('bg-surface-light','bg-surface-dark');
-        } else {
-            html.classList.remove('dark');
-            body.className = body.className.replace('bg-surface-dark','bg-surface-light');
-        }
-        list.querySelectorAll('a').forEach(function(a) {
-            a.classList.toggle('border-subtle-dark', dark);
-            a.classList.toggle('border-subtle-light', !dark);
+      const list = document.getElementById("posts-list");
+      posts.forEach(function (post) {
+        const d = new Date(post.date + "T00:00:00");
+        const formatted = d.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
         });
-        document.querySelector('footer').classList.toggle('border-subtle-dark', dark);
-        document.querySelector('footer').classList.toggle('border-subtle-light', !dark);
+        const a = document.createElement("a");
+        a.href = "posts/" + post.slug + ".html";
+        a.className =
+          "group block py-6 border-b border-subtle-dark hover:border-white/15 transition-colors";
+        a.innerHTML =
+          '<div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6">' +
+          '<span class="text-xs font-mono shrink-0 w-28 text-[#ff5c33]">' +
+          formatted +
+          "</span>" +
+          '<h2 class="text-base sm:text-lg font-medium tracking-tight text-white/70 group-hover:text-[#ff5c33] transition-colors">' +
+          post.title +
+          "</h2>" +
+          "</div>";
+        list.appendChild(a);
+      });
+
+      lucide.createIcons();
+      var html = document.documentElement;
+      var body = document.body;
+
+      function applyTheme(dark) {
+        if (dark) {
+          html.classList.add("dark");
+          body.className = body.className.replace(
+            "bg-surface-light",
+            "bg-surface-dark",
+          );
+        } else {
+          html.classList.remove("dark");
+          body.className = body.className.replace(
+            "bg-surface-dark",
+            "bg-surface-light",
+          );
+        }
+        list.querySelectorAll("a").forEach(function (a) {
+          a.classList.toggle("border-subtle-dark", dark);
+          a.classList.toggle("border-subtle-light", !dark);
+        });
+        document
+          .querySelector("footer")
+          .classList.toggle("border-subtle-dark", dark);
+        document
+          .querySelector("footer")
+          .classList.toggle("border-subtle-light", !dark);
         lucide.createIcons();
-    }
+      }
 
-    if (localStorage.getItem('theme') === 'light') applyTheme(false);
+      if (localStorage.getItem("theme") === "light") applyTheme(false);
 
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-        html.classList.add('transitioning');
-        applyTheme(!html.classList.contains('dark'));
-        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-        setTimeout(function() { html.classList.remove('transitioning'); }, 450);
-    });
+      document
+        .getElementById("theme-toggle")
+        .addEventListener("click", function () {
+          html.classList.add("transitioning");
+          applyTheme(!html.classList.contains("dark"));
+          localStorage.setItem(
+            "theme",
+            html.classList.contains("dark") ? "dark" : "light",
+          );
+          setTimeout(function () {
+            html.classList.remove("transitioning");
+          }, 450);
+        });
     </script>
-</body>
+  </body>
 </html>

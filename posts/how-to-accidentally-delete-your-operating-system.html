@@ -14,17 +14,23 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        surface:  { dark: '#0a0a0a', light: '#282828' },
-                        card:     { dark: '#141414', light: '#333333' },
-                        subtle:   { dark: 'rgba(255,255,255,0.06)', light: 'rgba(255,255,255,0.1)' },
-                        muted:    { dark: 'rgba(255,255,255,0.4)',  light: 'rgba(255,255,255,0.55)' },
-                    }
+                        surface:  { dark: '#110d0b', light: '#faf5ee' },
+                        card:     { dark: '#1d1714', light: '#ffffff' },
+                        subtle:   { dark: 'rgba(255,145,110,0.08)', light: 'rgba(33,26,21,0.1)' },
+                        muted:    { dark: 'rgba(242,236,229,0.4)',  light: 'rgba(33,26,21,0.5)' },
+                    },
                 }
             }
         }
     </script>
     <style>
         html { scroll-behavior: smooth; }
+        :root { --accent: #ff5c33; }
+        .glow { position: fixed; border-radius: 50%; background: var(--accent); pointer-events: none; z-index: -1; }
+        .glow-1 { top: -80px; right: -80px; width: 280px; height: 280px; opacity: 0.18; }
+        .glow-2 { bottom: -100px; left: -100px; width: 320px; height: 320px; opacity: 0.18; }
+        html.dark .glow-1 { opacity: 0.12; }
+        html.dark .glow-2 { opacity: 0.08; }
         body { font-family: 'Inter', sans-serif; }
         html.transitioning,
         html.transitioning *,
@@ -39,10 +45,10 @@
         .prose p { margin-bottom: 1.5em; }
         .prose h2 { font-size: 1.375rem; font-weight: 500; margin-top: 2.5em; margin-bottom: 0.75em; letter-spacing: -0.01em; color: rgba(255,255,255,0.85); }
         .prose h3 { font-size: 1.125rem; font-weight: 500; margin-top: 2em; margin-bottom: 0.5em; color: rgba(255,255,255,0.8); }
-        .prose a { text-decoration: underline; text-underline-offset: 2px; }
-        .prose a:hover { opacity: 0.7; }
-        .prose blockquote { border-left: 2px solid rgba(255,255,255,0.12); padding-left: 1.25em; margin: 1.5em 0; font-style: italic; }
-        .prose code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.875em; background: rgba(255,255,255,0.06); padding: 0.15em 0.4em; border-radius: 4px; }
+        .prose a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(255,92,51,0.4); text-underline-offset: 2px; }
+        .prose a:hover { text-decoration-color: var(--accent); opacity: 1; }
+        .prose blockquote { border-left: 2px solid var(--accent); padding-left: 1.25em; margin: 1.5em 0; font-style: italic; }
+        .prose code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.875em; color: var(--accent); background: rgba(255,92,51,0.1); padding: 0.15em 0.4em; border-radius: 4px; }
         .prose pre { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.25em; overflow-x: auto; margin: 1.5em 0; }
         .prose pre code { background: none; padding: 0; font-size: 0.8125rem; }
         .prose ul, .prose ol { padding-left: 1.5em; margin-bottom: 1.5em; }
@@ -50,16 +56,57 @@
         .prose img { border-radius: 12px; margin: 2em 0; width: 100%; }
         .prose hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 2.5em 0; }
         .prose strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+        html:not(.dark) body,
+        html:not(.dark) .prose { color: #211a15; }
+        html:not(.dark) .text-white\/85 { color: rgba(33,26,21,0.85) !important; }
+        html:not(.dark) .text-white\/80 { color: rgba(33,26,21,0.8) !important; }
+        html:not(.dark) .text-white\/70 { color: rgba(33,26,21,0.7) !important; }
+        html:not(.dark) .text-white\/60 { color: rgba(33,26,21,0.6) !important; }
+        html:not(.dark) .text-white\/40 { color: rgba(33,26,21,0.45) !important; }
+        html:not(.dark) .text-white\/30 { color: rgba(33,26,21,0.35) !important; }
+        html:not(.dark) .text-white\/25 { color: rgba(33,26,21,0.3) !important; }
+        html:not(.dark) .border-white\/10 { border-color: rgba(33,26,21,0.15) !important; }
+        html:not(.dark) .hover\:text-white\/70:hover { color: rgba(33,26,21,0.85) !important; }
+        html:not(.dark) .group:hover .group-hover\:text-white { color: #211a15 !important; }
+        html:not(.dark) .brand-link { position: relative; display: inline-flex; }
+        html:not(.dark) .brand-link::after {
+            content: ''; position: absolute; left: 0; bottom: -10px;
+            width: 32px; height: 2px; background: #ff5c33;
+        }
+        html:not(.dark) .font-mono { color: #ff5c33 !important; }
+        html:not(.dark) .prose pre { background: #ffffff; border-color: rgba(33,26,21,0.08); }
+        html:not(.dark) .prose h2 { color: rgba(33,26,21,0.85); }
+        html:not(.dark) .prose h3 { color: rgba(33,26,21,0.8); }
+        html:not(.dark) .prose strong { color: rgba(33,26,21,0.85); }
+        html:not(.dark) body {
+            background-image: radial-gradient(rgba(33,26,21,0.06) 1px, transparent 1px);
+            background-size: 22px 22px;
+        }
+        .glow-3 { top: 40%; left: -60px; width: 180px; height: 180px; opacity: 0.15; }
+        .glow-4 { top: 15%; right: 10%; width: 90px; height: 90px; opacity: 0.16; }
+        .glow-5 { bottom: 20%; right: -40px; width: 140px; height: 140px; opacity: 0.15; }
+        html.dark .glow-3 { opacity: 0.07; }
+        html.dark .glow-4 { opacity: 0.09; }
+        html.dark .glow-5 { opacity: 0.08; }
+        html:not(.dark) .prose h2::before {
+            content: ''; display: inline-block; width: 8px; height: 8px;
+            background: var(--accent); margin-right: 8px; border-radius: 2px;
+        }
     </style>
 </head>
 
 <body class="bg-surface-dark text-white min-h-screen">
+    <div class="glow glow-1" aria-hidden="true"></div>
+    <div class="glow glow-2" aria-hidden="true"></div>
+    <div class="glow glow-3" aria-hidden="true"></div>
+    <div class="glow glow-4" aria-hidden="true"></div>
+    <div class="glow glow-5" aria-hidden="true"></div>
 
     <!-- Header -->
     <header class="max-w-2xl mx-auto px-6 pt-16 pb-12 flex items-center justify-between">
-        <a href="../" class="flex items-center gap-2.5">
-            <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
-                <span class="text-black text-xs font-semibold">S</span>
+        <a href="../" class="brand-link flex items-center gap-2.5">
+            <div class="w-7 h-7 bg-[#ff5c33] rounded-full flex items-center justify-center">
+                <span class="text-white text-xs font-semibold">S</span>
             </div>
             <span class="font-medium text-sm tracking-tight">Till we are Gods Blog</span>
         </a>
@@ -74,7 +121,7 @@
 
     <!-- Article -->
     <main class="max-w-2xl mx-auto px-6 pb-24">
-        <a href="../" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-white/60 transition-colors mb-12">
+        <a href="../" class="inline-flex items-center gap-1.5 text-xs text-white/30 hover:text-[#ff5c33] transition-colors mb-12">
             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to posts
         </a>
 
@@ -85,7 +132,7 @@
 
         <article class="prose text-white/60 font-light leading-[1.75] text-[15px]">
 
-            <p>In a Linux operating system a single line of code could delete the whole system. The files, the configurations, system files could be permanently erased. Consider it like right click, deleting a folder in Windows but instead it's the whole operating system. We'll be looking into the underlying qualities of the operating system that allow this functionality to happen.</p>
+            <p>In a Linux operating system a single line of code could delete the whole system. The files, the configurations, system files could be permanently erased. Consider it like right click, deleting a folder in Windows but instead it's the whole operating system. We'll be looking into the underlying qualities of the operating system that allow this interesting thing to happen.</p>
 
             <h2>So, what's Linux?</h2>
 
@@ -97,7 +144,7 @@
 
             <p>Linux is organized in a tree structure where everything is under the root directory (a directory is a folder in the Windows world), denoted by <code>/</code>. So everything, including your wallpaper configuration, the programs you installed, and your username and password, is somewhere under the root directory, and the sign for that main tree is <code>/</code>.</p>
 
-            <p>This allows you to access anything by navigating down the tree to the location you want. This is why you'll most likely hear the phrase "Everything in Linux is a file" — it means you can access anything by directly navigating to it and opening it. For example, if you want to navigate to your Downloads folder, you'd type:</p>
+            <p>This allows you to access anything by navigating down the tree to the location you want. This is why you'll most likely hear the phrase "Everything in Linux is a file" , it means you can access anything by directly navigating to it and opening it. For example, if you want to navigate to your Downloads folder, you'd type:</p>
 
             <pre><code>cd /home/john/Downloads</code></pre>
 
@@ -113,7 +160,7 @@
 
             <p>you can see the usernames that are registered on that device. <code>cat</code> is used to print the contents of a file. So if we say <code>cat example-text.txt</code>, it will print the contents of the <code>example-text.txt</code> file we have in our current folder. When we did <code>cat /etc/passwd</code>, we're printing everything inside <code>/etc/passwd</code>.</p>
 
-            <p>You can also view the hashed passwords (passwords are not stored as plain text files; they are transformed so that even if they leak, it's harder to use them — the transformation is called hashing, and it's a one-way transformation) for the accounts on that device by typing:</p>
+            <p>You can also view the hashed passwords (passwords are not stored as plain text files; they are transformed so that even if they leak, it's harder to use them, the transformation is called hashing, and it's a one-way transformation) for the accounts on that device by typing:</p>
 
             <pre><code>cat /etc/shadow</code></pre>
 
@@ -121,7 +168,7 @@
 
             <h2>Can you delete the operating system?</h2>
 
-            <p>Now for the fun part — remember when we said that "Everything in Linux is a file"? We do lots of stuff to files; for example, if we had a text file, we can rename it, we can add contents to it, we can also overwrite existing content, and, most importantly, delete it. If our original claim was correct, we should be able to delete everything, right?</p>
+            <p>Now for the fun part, remember when we said that "Everything in Linux is a file"? We do lots of stuff to files; for example, if we had a text file, we can rename it, we can add contents to it, we can also overwrite existing content, and, most importantly, delete it. If our original claim was correct, we should be able to delete everything, right?</p>
 
             <p>We said the operating system had a tree-like structure where there is the root directory, a root branch, and everything can be accessed by going down to the branches, so that would mean if we cut off the root branch, everything inside it should get deleted.</p>
 
